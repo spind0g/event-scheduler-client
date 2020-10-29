@@ -1,13 +1,11 @@
 export const state = {
     success: '',
-    errors: [],
+    errors: null,
 };
 
 export const getters = {
     success: ({ success }) => success,
     errors: ({ errors }) => errors,
-    hasAlertSuccess: ({ success }) => (success ? true : false),
-    hasAlertErrors: ({ errors }) => (errors.length ? true : false),
 };
 
 export const mutations = {
@@ -24,18 +22,36 @@ export const mutations = {
     },
 
     CLEAR_ALERT_ERRORS(state) {
-        state.errors = [];
+        state.errors = null;
     },
 };
 
 export const actions = {
-    setSuccess({ commit }, message) {
-        commit('CLEAR_ALERT_ERRORS');
+    setSuccess({ dispatch, commit }, message) {
+        dispatch('dismissError');
         commit('SET_ALERT_SUCCESS', message);
     },
 
-    setErrors({ commit }, errors) {
-        commit('CLEAR_ALERT_SUCCESS');
+    setErrors({ dispatch, commit }, errors) {
+        dispatch('dismissSuccess');
         commit('SET_ALERT_ERRORS', errors);
+    },
+
+    dismissSuccess({ commit }) {
+        commit('CLEAR_ALERT_SUCCESS');
+    },
+
+    dismissError({ commit }) {
+        commit('CLEAR_ALERT_ERRORS');
+    },
+
+    dismissAll({ state, commit }) {
+        if (state.success) {
+            commit('CLEAR_ALERT_SUCCESS');
+        }
+
+        if (state.errors) {
+            commit('CLEAR_ALERT_ERRORS');
+        }
     },
 };
