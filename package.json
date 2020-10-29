@@ -43,6 +43,7 @@
       "parser": "babel-eslint"
     },
     "rules": {
+      "no-console": "warn",
       "prettier/prettier": [
         "warn",
         {
