@@ -147,6 +147,7 @@ export default {
 
     computed: {
         ...mapGetters({
+            alertHasSuccess: 'alerts/success',
             alertHasErrors: 'alerts/errors',
             selectedEvent: 'events/selected',
         }),
@@ -245,6 +246,7 @@ export default {
             clearSelectedEvent: 'events/clearSelected',
             showAlertErrors: 'alerts/setErrors',
             dismissAlertErrors: 'alerts/dismissErrors',
+            dismissAllAlerts: 'alerts/dismissAll',
         }),
 
         disabledDaysInclude(intDay) {
@@ -271,6 +273,10 @@ export default {
         saveEvent() {
             if (this.selectedEvent) {
                 this.clearSelectedEvent();
+            }
+
+            if (this.alertHasSuccess || this.alertHasErrors) {
+                this.dismissAllAlerts();
             }
 
             this.setLoadingStatusMessage('Saving event...');
