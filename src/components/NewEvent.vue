@@ -173,7 +173,7 @@ export default {
                 }
             }
 
-            return 'Select a date range from the calendar below.<br /><sub>Double-click for a date single-day event</sub>';
+            return 'Select a date range from the calendar below.<br /><sub>Double-click a date for single-day events</sub>';
         },
 
         // form
