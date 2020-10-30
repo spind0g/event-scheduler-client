@@ -235,6 +235,8 @@ export default {
 
     methods: {
         ...mapActions({
+            setLoadingStatusMessage: 'loadingStatus/setMessage',
+            finishLoading: 'loadingStatus/finish',
             addEvent: 'events/add',
             assertEventWasAdded: 'alerts/setSuccess',
             showAlertErrors: 'alerts/setErrors',
@@ -275,6 +277,9 @@ export default {
         },
 
         saveEvent() {
+            this.setLoadingStatusMessage('Saving event...');
+            this.dismissAlertErrors();
+
             this.addEvent(this.form.event)
                 .then(newEvent =>
                     this.assertEventWasAdded(
@@ -282,6 +287,7 @@ export default {
                     ),
                 )
                 .then(() => this.clearData())
+                .then(() => this.finishLoading())
                 .catch(errors => {
                     const {
                         name,
@@ -316,6 +322,7 @@ export default {
                     this.form.errors = errorMessage.items;
 
                     this.showAlertErrors(errorMessage);
+                    this.finishLoading();
                 });
         },
     },

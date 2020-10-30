@@ -1,10 +1,16 @@
 <template>
     <v-app>
-        <v-navigation-drawer v-bind:width="325" app>
+        <v-overlay v-if="loadingStatusMessage">
+            <v-progress-circular indeterminate size="256">
+                {{ loadingStatusMessage }}
+            </v-progress-circular>
+        </v-overlay>
+
+        <v-navigation-drawer v-model="isDrawerShown" :width="325" app>
             <new-event />
         </v-navigation-drawer>
 
-        <v-app-bar app>
+        <v-app-bar v-model="isAppBarShown" app>
             <v-toolbar-title>Event Scheduler</v-toolbar-title>
         </v-app-bar>
 
@@ -25,6 +31,7 @@
                     </li>
                 </ol>
             </v-alert>
+
             <router-view></router-view>
         </v-main>
     </v-app>
@@ -47,6 +54,15 @@ export default {
             successAlertMessage: 'alerts/success',
             errorAlertMessage: 'alerts/errors',
         }),
+
+        // TODO: fix setter
+        isAppBarShown() {
+            return !this.loadingStatusMessage;
+        },
+
+        isDrawerShown() {
+            return !this.loadingStatusMessage;
+        },
     },
 
     methods: {
