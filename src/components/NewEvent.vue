@@ -10,7 +10,7 @@
                 :error="errorsIncludename"
             />
 
-            <small>{{ eventDateRange }}</small>
+            <small v-html="eventDateRange"></small>
 
             <v-date-picker
                 v-model="dateRange"
@@ -173,7 +173,7 @@ export default {
                 }
             }
 
-            return 'Select a date range from the calendar below';
+            return 'Select a date range from the calendar below.<br /><sub>Double-click for a date single-day event</sub>';
         },
 
         // form
