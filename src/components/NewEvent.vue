@@ -147,6 +147,7 @@ export default {
     computed: {
         ...mapGetters({
             alertHasErrors: 'alerts/errors',
+            selectedEvent: 'events/selected',
         }),
 
         // data
@@ -239,6 +240,8 @@ export default {
             finishLoading: 'loadingStatus/finish',
             addEvent: 'events/add',
             assertEventWasAdded: 'alerts/setSuccess',
+            viewEventById: 'events/viewById',
+            clearSelectedEvent: 'events/clearSelected',
             showAlertErrors: 'alerts/setErrors',
             dismissAlertErrors: 'alerts/dismissErrors',
         }),
@@ -277,15 +280,20 @@ export default {
         },
 
         saveEvent() {
+            if (this.selectedEvent) {
+                this.clearSelectedEvent();
+            }
+
             this.setLoadingStatusMessage('Saving event...');
             this.dismissAlertErrors();
 
             this.addEvent(this.form.event)
-                .then(newEvent =>
+                .then(newEvent => {
                     this.assertEventWasAdded(
                         `Event "${newEvent.name}" successfully saved`,
-                    ),
-                )
+                    );
+                    this.viewEventById(newEvent.id);
+                })
                 .then(() => this.clearData())
                 .then(() => this.finishLoading())
                 .catch(errors => {

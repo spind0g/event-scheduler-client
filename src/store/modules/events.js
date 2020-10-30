@@ -58,11 +58,15 @@ export const actions = {
         }
     },
 
-    async view({ state, commit }, eventId) {
+    async viewById({ state, commit }, eventId) {
         const event = await state.all.find(({ id }) => id === eventId);
 
         commit('SET_SELECTED_EVENT', event);
 
         return event;
+    },
+
+    clearSelected({ commit }) {
+        commit('SET_SELECTED_EVENT', null);
     },
 };
