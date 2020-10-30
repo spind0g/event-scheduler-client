@@ -1,53 +1,51 @@
 <template>
-    <div>
-        <template v-if="loadingStatusMessage">
-            {{ loadingStatusMessage }}
-            <br />
-        </template>
+    <v-app>
+        <v-navigation-drawer v-bind:width="325" app>
+            <new-event />
+        </v-navigation-drawer>
 
-        <template v-if="successAlert">
-            <span @click="dismissSuccessAlert">{{ successAlert }}</span>
-            <br />
-        </template>
+        <v-app-bar app>
+            <v-toolbar-title>Event Scheduler</v-toolbar-title>
+        </v-app-bar>
 
-        <template v-if="errorAlert">
-            <div @click="dismissErrorAlert">
-                <h3>{{ errorAlert.subject }}</h3>
+        <v-main class="mx-4 my-4">
+            <v-alert v-if="successAlertMessage" text type="success" dismissible>
+                {{ successAlertMessage }}
+            </v-alert>
+
+            <v-alert v-if="errorAlertMessage" text type="error" dismissible>
+                <h3>{{ errorAlertMessage.subject }}</h3>
+
                 <ol>
-                    <li v-for="(error, index) in errorAlert.items" :key="index">
+                    <li
+                        v-for="(error, index) in errorAlertMessage.items"
+                        :key="index"
+                    >
                         {{ error }}
                     </li>
                 </ol>
-            </div>
-            <br />
-        </template>
-
-        <navigation />
-
-        <new-event />
-
-        <router-view></router-view>
-    </div>
+            </v-alert>
+            <router-view></router-view>
+        </v-main>
+    </v-app>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Navigation from '@/components/Navigation.vue';
 import NewEvent from '@/components/NewEvent.vue';
 
 export default {
     name: 'App',
 
     components: {
-        Navigation,
         NewEvent,
     },
 
     computed: {
         ...mapGetters({
             loadingStatusMessage: 'loadingStatus/message',
-            successAlert: 'alerts/success',
-            errorAlert: 'alerts/errors',
+            successAlertMessage: 'alerts/success',
+            errorAlertMessage: 'alerts/errors',
         }),
     },
 

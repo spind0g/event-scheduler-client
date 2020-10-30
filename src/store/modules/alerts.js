@@ -28,7 +28,7 @@ export const mutations = {
 
 export const actions = {
     setSuccess({ dispatch, commit }, message) {
-        dispatch('dismissError');
+        dispatch('dismissErrors');
         commit('SET_ALERT_SUCCESS', message);
     },
 
@@ -41,7 +41,7 @@ export const actions = {
         commit('CLEAR_ALERT_SUCCESS');
     },
 
-    dismissError({ commit }) {
+    dismissErrors({ commit }) {
         commit('CLEAR_ALERT_ERRORS');
     },
 

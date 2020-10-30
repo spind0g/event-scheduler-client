@@ -1,31 +1,14 @@
 <template>
     <div>
-        <template v-if="allEvents.length">
-            <event
-                v-for="event in allEvents"
-                :key="event.id"
-                :event="event"
-                :select="selectEvent"
-                style="cursor: pointer;"
-            />
-        </template>
-
-        <template v-if="!isLoading && !allEvents.length">
-            You have no events
-        </template>
+        <!-- <v-calendar v-model="focus" color="primary"></v-calendar> -->
     </div>
 </template>
 
 <script>
 import { mapGetters, mapActions } from 'vuex';
-import Event from '@/components/Event.vue';
 
 export default {
     name: 'Events',
-
-    components: {
-        Event,
-    },
 
     computed: {
         ...mapGetters({
