@@ -1,9 +1,11 @@
+import moment from 'moment';
+
 export const dateUtil = {
     enumerateDateRange: (start, end) => {
-        let now = start.clone();
+        let now = moment(start).clone();
         let dates = [];
 
-        while (now.isSameOrBefore(end)) {
+        while (now.isSameOrBefore(moment(end))) {
             dates.push(now.format('YYYY-MM-DD'));
             now.add(1, 'day');
         }
