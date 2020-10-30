@@ -31,8 +31,11 @@
                 :error="errorsIncludeSelectedDays"
             />
 
-            <!-- :disabled="eventFormDataIsIncomplete" -->
-            <v-btn @click.prevent="saveEvent" color="primary">
+            <v-btn
+                @click.prevent="saveEvent"
+                :disabled="eventFormDataIsIncomplete"
+                color="primary"
+            >
                 Save
             </v-btn>
 
