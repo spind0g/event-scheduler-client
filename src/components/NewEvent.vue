@@ -54,6 +54,7 @@
 import { mapGetters, mapActions } from 'vuex';
 import moment from 'moment';
 import range from 'lodash/range';
+import { dateUtil } from '@/utils';
 
 export default {
     name: 'NewEvent',
@@ -100,7 +101,7 @@ export default {
                 const numberOfDays =
                     Math.abs(moment(val[0]).diff(moment(val[1]), 'days')) + 1;
 
-                if (numberOfDays <= 7) {
+                if (numberOfDays < 7) {
                     // auto-select day checkbox if event is one day
                     if (numberOfDays === 1) {
                         const intDay =
@@ -112,7 +113,7 @@ export default {
                         this.form.event.selected_days = [intDay];
                     }
 
-                    // disable non-applicable day checkboxes if selected range
+                    // disable non-applicable day checkboxes if selected range < 7
                     else {
                         this.form.event.selected_days = [];
 
@@ -120,7 +121,7 @@ export default {
 
                         const startingDate = val[0] < val[1] ? val[0] : val[1];
                         const endingDate = val[1] > val[0] ? val[1] : val[0];
-                        const enumeratedDateRange = this.enumerateDateRange(
+                        const enumeratedDateRange = dateUtil.enumerateDateRange(
                             moment(startingDate),
                             moment(endingDate),
                         );
@@ -245,18 +246,6 @@ export default {
             showAlertErrors: 'alerts/setErrors',
             dismissAlertErrors: 'alerts/dismissErrors',
         }),
-
-        enumerateDateRange(start, end) {
-            let now = start.clone();
-            let dates = [];
-
-            while (now.isSameOrBefore(end)) {
-                dates.push(now.format('YYYY-MM-DD'));
-                now.add(1, 'day');
-            }
-
-            return dates;
-        },
 
         disabledDaysInclude(intDay) {
             return this.disabledDays.includes(intDay);
