@@ -6,7 +6,7 @@
             </v-progress-circular>
         </v-overlay>
 
-        <v-navigation-drawer v-model="isDrawerShown" :width="325" app>
+        <v-navigation-drawer :value="isDrawerShown" :width="325" app>
             <new-event />
         </v-navigation-drawer>
 
@@ -55,7 +55,6 @@ export default {
             errorAlertMessage: 'alerts/errors',
         }),
 
-        // TODO: fix setter
         isAppBarShown() {
             return !this.loadingStatusMessage;
         },
