@@ -12,4 +12,12 @@ export const dateUtil = {
 
         return dates;
     },
+
+    getMonthName: date => {
+        return moment(date).format('MMMM');
+    },
+
+    getDateVal: date => {
+        return moment(date).format('D');
+    },
 };
