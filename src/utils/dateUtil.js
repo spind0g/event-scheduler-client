@@ -20,4 +20,8 @@ export const dateUtil = {
     getDateVal: date => {
         return moment(date).format('D');
     },
+
+    getDayVal: date => {
+        return moment(date).format('d');
+    },
 };
