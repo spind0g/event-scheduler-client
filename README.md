@@ -1,24 +1,18 @@
-# event-scheduler-client
+# Event Scheduler Client
+
+![Demo](https://res.cloudinary.com/hsebqhdoz/image/upload/v1604116764/demo_pibknx.gif)
+
+### Demo
+https://aa-event-scheduler-client.herokuapp.com/
 
 ## Project setup
 ```
-npm install
+> git clone https://github.com/spind0g/event-scheduler-client.git
+> cd event-scheduler-client
+> npm install
 ```
 
-### Compiles and hot-reloads for development
+### Development
 ```
-npm run serve
+> npm run serve
 ```
-
-### Compiles and minifies for production
-```
-npm run build
-```
-
-### Lints and fixes files
-```
-npm run lint
-```
-
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
