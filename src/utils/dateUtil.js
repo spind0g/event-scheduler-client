@@ -22,6 +22,8 @@ export const dateUtil = {
     },
 
     getDayVal: date => {
-        return moment(date).format('d');
+        return parseInt(moment(date).format('d')) === 0
+            ? 7
+            : parseInt(moment(date).format('d'));
     },
 };
